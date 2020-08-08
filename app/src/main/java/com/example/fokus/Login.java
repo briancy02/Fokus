@@ -42,15 +42,18 @@ public class Login extends AppCompatActivity {
         btnRegister = findViewById(R.id.btnRegister);
         btnResetPassword = findViewById(R.id.btnResetPassword);
 
+        // When Login button is clicked...
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(etMail.getText().toString().isEmpty() || etPassword.getText().toString().isEmpty())
+                // Instruct to fill in all fields if fields are empty
+                if(etMail.getText().toString().isEmpty() || etMail.getText().toString().isEmpty())
                 {
                     Toast.makeText(Login.this, "Please enter all fields!", Toast.LENGTH_SHORT).show();
                 }
                 else
                 {
+                    // Save input data and verify whether the person logged in exists in the backendless database
                     String email = etMail.getText().toString().trim();
                     String password = etPassword.getText().toString().trim();
 
@@ -59,9 +62,10 @@ public class Login extends AppCompatActivity {
                     Backendless.UserService.login(email, password, new AsyncCallback<BackendlessUser>() {
                         @Override
                         public void handleResponse(BackendlessUser response) {
+                            // if login was successful return to main activity
                             Toast.makeText(Login.this, "Logged in successfully", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(Login.this, MainActivity.class));
-                            //Login.this.finish();
+                            Login.this.finish();
 
                         }
 
