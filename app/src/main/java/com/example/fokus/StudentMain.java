@@ -25,7 +25,7 @@ public class StudentMain extends AppCompatActivity {
     private TextView tvLoad;
 
 
-    Button btnDueDate, btnStudentProf, btnStudentClasses;
+    Button btnDueDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +33,7 @@ public class StudentMain extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         btnDueDate = (Button) findViewById(R.id.btnDueDate);
-        btnStudentProf = (Button) findViewById(R.id.btnStudentProf);
-        btnStudentClasses = (Button) findViewById(R.id.btnStudentClasses);
+
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
@@ -56,29 +55,9 @@ public class StudentMain extends AppCompatActivity {
         });
 
 
-        // When Classes is clicked
-        btnStudentClasses.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Takes student to their classes
 
 
-            }
 
-
-        });
-
-        // When Profile is clicked
-        btnDueDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Takes student to their profile
-
-
-            }
-
-
-        });
 
 
     }

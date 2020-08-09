@@ -25,7 +25,8 @@ public class TeacherMain extends AppCompatActivity {
     private TextView tvLoad;
 
 
-    Button btnViewAssign, btnTeacherProf, btnNewAssign, btnTeacherClasses;
+    Button btnViewAssign, btnNewAssign;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,9 +34,9 @@ public class TeacherMain extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         btnViewAssign = (Button) findViewById(R.id.btnViewAssign);
-        btnTeacherClasses = (Button) findViewById(R.id.btnTeacherClasses);
+
         btnNewAssign = (Button) findViewById(R.id.btnNewAssign);
-        btnTeacherProf = (Button) findViewById(R.id.btnTeacherProf);
+
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
@@ -57,29 +58,7 @@ public class TeacherMain extends AppCompatActivity {
         });
 
 
-        // When Teacher Profile is Clicked
-        btnTeacherProf.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Takes student to their classes
 
-
-            }
-
-
-        });
-
-        // When My Classes is clicked
-        btnTeacherClasses.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Takes student to their profile
-
-
-            }
-
-
-        });
 
         // When New Assignment is Clicked
         btnNewAssign.setOnClickListener(new View.OnClickListener() {
