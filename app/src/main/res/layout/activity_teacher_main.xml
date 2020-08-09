@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/btnTeacherClasses"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="My Classes"
+        tools:layout_editor_absoluteX="7dp"
+        tools:layout_editor_absoluteY="64dp" />
+
+    <Button
+        android:id="@+id/btnTeacherProf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Profile"
+        tools:layout_editor_absoluteX="7dp"
+        tools:layout_editor_absoluteY="153dp" />
+
+    <Button
+        android:id="@+id/btnNewAssign"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Assignment"
+        tools:layout_editor_absoluteX="237dp"
+        tools:layout_editor_absoluteY="67dp" />
+
+    <Button
+        android:id="@+id/btnViewAssign"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="View Assignments"
+        tools:layout_editor_absoluteX="237dp"
+        tools:layout_editor_absoluteY="157dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>
