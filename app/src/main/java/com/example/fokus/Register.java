@@ -67,6 +67,11 @@ public class Register extends AppCompatActivity {
                         // there are many set properties where we need to input name, teacher or student info etc.
                         user.setProperty("name", name);
 
+                        Teacher teacher = new Teacher();
+                        teacher.name = name;
+                        teacher.user = user;
+                        Backendless.Data.of( Teacher.class ).save( teacher );
+
                         showProgress(true);
 
                         Backendless.UserService.register(user, new AsyncCallback<BackendlessUser>() {
@@ -119,6 +124,11 @@ public class Register extends AppCompatActivity {
                         user.setProperty("title", "student");
 
                         showProgress(true);
+
+                        Student student = new Student();
+                        student.name = name;
+                        student.user = user;
+                        Backendless.Data.of( Teacher.class ).save( student );
 
                         Backendless.UserService.register(user, new AsyncCallback<BackendlessUser>() {
                             @Override
