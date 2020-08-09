@@ -39,7 +39,7 @@ public class Login extends AppCompatActivity {
         etMail = findViewById(R.id.etMail);
         etPassword = findViewById(R.id.etPassword);
         btnLogin = findViewById(R.id.btnLogin);
-        btnRegister = findViewById(R.id.btnRegister);
+        btnRegister = findViewById(R.id.btnRegisterTeacher);
         btnResetPassword = findViewById(R.id.btnResetPassword);
 
         // When Login button is clicked...

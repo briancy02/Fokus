@@ -40,14 +40,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="please enter your name" />
+            android:hint="please enter your name"
+            android:inputType="textPersonName" />
 
         <EditText
             android:id="@+id/etMail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:hint="please enter email"
             android:inputType="textEmailAddress" />
 
         <EditText
@@ -67,10 +68,18 @@
             android:inputType="textPassword" />
 
         <Button
-            android:id="@+id/btnRegister"
+            android:id="@+id/btnRegisterTeacher"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Register" />
+            android:text="Register as Teacher" />
+
+        <Button
+            android:id="@+id/btnRegisterStudent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Register as student" />
+
+
     </LinearLayout>
 
 </LinearLayout>

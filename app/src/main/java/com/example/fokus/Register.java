@@ -24,7 +24,8 @@ public class Register extends AppCompatActivity {
     private TextView tvLoad;
 
     EditText etName, etMail, etPassword, etConfirmPassword;
-    Button btnRegister;
+    Button btnRegisterTeacher, btnRegisterStudent;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +41,66 @@ public class Register extends AppCompatActivity {
         etPassword = findViewById(R.id.etPassword);
         etConfirmPassword = findViewById(R.id.etConfirmPassword);
 
-        btnRegister = findViewById(R.id.btnRegister);
-        btnRegister.setOnClickListener(new View.OnClickListener() {
+        btnRegisterTeacher = findViewById(R.id.btnRegisterTeacher);
+        btnRegisterStudent = findViewById(R.id.btnRegisterStudent);
+
+        btnRegisterTeacher.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(etName.getText().toString().isEmpty() || etMail.getText().toString().isEmpty() ||
+                        etPassword.getText().toString().isEmpty() || etConfirmPassword.getText().toString().isEmpty())
+                {
+                    Toast.makeText(Register.this, "Please enter all details", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    if(etPassword.getText().toString().trim().equals(etConfirmPassword.getText().toString().trim()))
+                    {
+                        String name = etName.getText().toString().trim();
+                        String email = etMail.getText().toString().trim();
+                        String password = etPassword.getText().toString().trim();
+
+                        BackendlessUser user = new BackendlessUser();
+                        user.setEmail(email);
+                        user.setPassword(password);
+                        user.setProperty("title", "teacher");
+                        // there are many set properties where we need to input name, teacher or student info etc.
+                        user.setProperty("name", name);
+
+                        Teacher teacher = new Teacher();
+                        teacher.name = name;
+                        teacher.user = user;
+                        Backendless.Data.of( Teacher.class ).save( teacher );
+
+                        showProgress(true);
+
+                        Backendless.UserService.register(user, new AsyncCallback<BackendlessUser>() {
+                            @Override
+                            public void handleResponse(BackendlessUser response) {
+                                showProgress(false);
+                                Toast.makeText(Register.this, "User successfully registered", Toast.LENGTH_SHORT).show();
+                                Register.this.finish();
+
+                            }
+
+                            @Override
+                            public void handleFault(BackendlessFault fault) {
+                                Toast.makeText(Register.this, "Error: " + fault.getMessage(), Toast.LENGTH_SHORT).show();
+                                showProgress(false);
+
+                            }
+                        });
+
+                    }
+                    else
+                    {
+                        Toast.makeText(Register.this, "Please make sure that your pass word and re-typed password is the same", Toast.LENGTH_SHORT).show();
+                    }
+
+                }
+            }
+        });
+        btnRegisterStudent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(etName.getText().toString().isEmpty() || etMail.getText().toString().isEmpty() ||
@@ -62,8 +121,14 @@ public class Register extends AppCompatActivity {
                         user.setPassword(password);
                         // there are many set properties where we need to input name, teacher or student info etc.
                         user.setProperty("name", name);
+                        user.setProperty("title", "student");
 
                         showProgress(true);
+
+                        Student student = new Student();
+                        student.name = name;
+                        student.user = user;
+                        Backendless.Data.of( Teacher.class ).save( student );
 
                         Backendless.UserService.register(user, new AsyncCallback<BackendlessUser>() {
                             @Override
