@@ -1,10 +1,16 @@
 package com.example.fokus;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.backendless.BackendlessUser;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Map;
+import java.util.Set;
 
-public class Teacher extends Person{
+public class Teacher extends Person implements Map {
     public ArrayList<Class> classArrayList = new ArrayList<Class>();
 
     public Teacher(){
@@ -22,5 +28,71 @@ public class Teacher extends Person{
 
     public void setClassArrayList(ArrayList<Class> classArrayList) {
         this.classArrayList = classArrayList;
+    }
+
+    @Override
+    public int size() {
+        return 0;
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return false;
+    }
+
+    @Override
+    public boolean containsKey(@Nullable Object o) {
+        return false;
+    }
+
+    @Override
+    public boolean containsValue(@Nullable Object o) {
+        return false;
+    }
+
+    @Nullable
+    @Override
+    public Object get(@Nullable Object o) {
+        return null;
+    }
+
+    @Nullable
+    @Override
+    public Object put(Object o, Object o2) {
+        return null;
+    }
+
+    @Nullable
+    @Override
+    public Object remove(@Nullable Object o) {
+        return null;
+    }
+
+    @Override
+    public void putAll(@NonNull Map map) {
+
+    }
+
+    @Override
+    public void clear() {
+
+    }
+
+    @NonNull
+    @Override
+    public Set keySet() {
+        return null;
+    }
+
+    @NonNull
+    @Override
+    public Collection values() {
+        return null;
+    }
+
+    @NonNull
+    @Override
+    public Set<Entry> entrySet() {
+        return null;
     }
 }

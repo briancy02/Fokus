@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.app.Application;
+import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -17,6 +19,8 @@ import com.backendless.Backendless;
 import com.backendless.BackendlessUser;
 import com.backendless.async.callback.AsyncCallback;
 import com.backendless.exceptions.BackendlessFault;
+
+import java.util.Map;
 
 public class Register extends AppCompatActivity {
     private View mProgressView;
@@ -60,34 +64,45 @@ public class Register extends AppCompatActivity {
                         String email = etMail.getText().toString().trim();
                         String password = etPassword.getText().toString().trim();
 
-                        BackendlessUser user = new BackendlessUser();
+                        final BackendlessUser user = new BackendlessUser();
                         user.setEmail(email);
                         user.setPassword(password);
                         user.setProperty("title", "teacher");
                         // there are many set properties where we need to input name, teacher or student info etc.
                         user.setProperty("name", name);
 
+                        Backendless.initApp( getApplicationContext(),"BC11B438-4778-DDBA-FF6C-BFECE07FA900", "6CC41866-9B97-4E73-B787-328D1DABA6E7" );
                         Teacher teacher = new Teacher();
                         teacher.name = name;
                         teacher.user = user;
-                        Backendless.Data.of( Teacher.class ).save( teacher );
-
                         showProgress(true);
+                        Backendless.Data.of( "Teacher" ).save( teacher, new AsyncCallback<Map>() {
+                            public void handleResponse( Map response )
+                            {
+                                // new Contact instance has been saved
+                                Backendless.UserService.register(user, new AsyncCallback<BackendlessUser>() {
+                                    @Override
+                                    public void handleResponse(BackendlessUser response) {
+                                        showProgress(false);
+                                        Toast.makeText(Register.this, "User successfully registered", Toast.LENGTH_SHORT).show();
+                                        Register.this.finish();
 
-                        Backendless.UserService.register(user, new AsyncCallback<BackendlessUser>() {
-                            @Override
-                            public void handleResponse(BackendlessUser response) {
-                                showProgress(false);
-                                Toast.makeText(Register.this, "User successfully registered", Toast.LENGTH_SHORT).show();
-                                Register.this.finish();
+                                    }
 
+                                    @Override
+                                    public void handleFault(BackendlessFault fault) {
+                                        Toast.makeText(Register.this, "Error: " + fault.getMessage(), Toast.LENGTH_SHORT).show();
+                                        showProgress(false);
+
+                                    }
+                                });
                             }
 
-                            @Override
-                            public void handleFault(BackendlessFault fault) {
+                            public void handleFault( BackendlessFault fault )
+                            {
+                                // an error has occurred, the error code can be retrieved with fault.getCode()
                                 Toast.makeText(Register.this, "Error: " + fault.getMessage(), Toast.LENGTH_SHORT).show();
                                 showProgress(false);
-
                             }
                         });
 
@@ -116,7 +131,7 @@ public class Register extends AppCompatActivity {
                         String email = etMail.getText().toString().trim();
                         String password = etPassword.getText().toString().trim();
 
-                        BackendlessUser user = new BackendlessUser();
+                        final BackendlessUser user = new BackendlessUser();
                         user.setEmail(email);
                         user.setPassword(password);
                         // there are many set properties where we need to input name, teacher or student info etc.
@@ -124,26 +139,38 @@ public class Register extends AppCompatActivity {
                         user.setProperty("title", "student");
 
                         showProgress(true);
+                        Backendless.initApp( getApplicationContext(),"BC11B438-4778-DDBA-FF6C-BFECE07FA900", "6CC41866-9B97-4E73-B787-328D1DABA6E7" );
 
                         Student student = new Student();
                         student.name = name;
                         student.user = user;
-                        Backendless.Data.of( Teacher.class ).save( student );
+                        Backendless.Data.of( "Student" ).save( student, new AsyncCallback<Map>() {
+                            public void handleResponse( Map response )
+                            {
+                                // new User instance has been saved
+                                Backendless.UserService.register(user, new AsyncCallback<BackendlessUser>() {
+                                    @Override
+                                    public void handleResponse(BackendlessUser response) {
+                                        showProgress(false);
+                                        Toast.makeText(Register.this, "User successfully registered", Toast.LENGTH_SHORT).show();
+                                        Register.this.finish();
 
-                        Backendless.UserService.register(user, new AsyncCallback<BackendlessUser>() {
-                            @Override
-                            public void handleResponse(BackendlessUser response) {
-                                showProgress(false);
-                                Toast.makeText(Register.this, "User successfully registered", Toast.LENGTH_SHORT).show();
-                                Register.this.finish();
+                                    }
 
+                                    @Override
+                                    public void handleFault(BackendlessFault fault) {
+                                        Toast.makeText(Register.this, "Error: " + fault.getMessage(), Toast.LENGTH_SHORT).show();
+                                        showProgress(false);
+
+                                    }
+                                });
                             }
 
-                            @Override
-                            public void handleFault(BackendlessFault fault) {
+                            public void handleFault( BackendlessFault fault )
+                            {
+                                // an error has occurred, the error code can be retrieved with fault.getCode()
                                 Toast.makeText(Register.this, "Error: " + fault.getMessage(), Toast.LENGTH_SHORT).show();
                                 showProgress(false);
-
                             }
                         });
 
