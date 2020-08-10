@@ -17,8 +17,8 @@ public class Teacher extends Person implements Map {
 
     }
 
-    public Teacher(String name, BackendlessUser user, String objectId, ArrayList<Class> classArrayList){
-        super(name, user, objectId);
+    public Teacher(String name, BackendlessUser user, String objectId, String mail, ArrayList<Class> classArrayList){
+        super(name, user, objectId, mail);
         this.classArrayList = classArrayList;
     }
 

@@ -6,15 +6,22 @@ public class Person {
     public String name;
     public BackendlessUser user;
     public String objectId;
+    public String mail;
 
     public Person(){
 
     }
 
-    public Person(String name, BackendlessUser user, String objectId){
+    public Person(String name, BackendlessUser user){
+        this.name = name;
+        this.user = user;
+    }
+
+    public Person(String name, BackendlessUser user, String objectId, String mail){
         this.name = name;
         this.user = user;
         this.objectId = objectId;
+        this.mail = mail;
     }
 
     public String getName() {
@@ -29,6 +36,10 @@ public class Person {
         return objectId;
     }
 
+    public String getMail() {
+        return mail;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -39,5 +50,9 @@ public class Person {
 
     public void setObjectId(String objectId) {
         this.objectId = objectId;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
     }
 }

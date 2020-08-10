@@ -73,11 +73,15 @@ public class Register extends AppCompatActivity {
 
                         Backendless.initApp( getApplicationContext(),"BC11B438-4778-DDBA-FF6C-BFECE07FA900", "6CC41866-9B97-4E73-B787-328D1DABA6E7" );
                         Teacher teacher = new Teacher();
-                        teacher.name = name;
-                        teacher.user = user;
+                        teacher.setName(name);
+                        teacher.setUser(user);
+                        teacher.setMail(email);
                         showProgress(true);
-                        Backendless.Data.of( "Teacher" ).save( teacher, new AsyncCallback<Map>() {
-                            public void handleResponse( Map response )
+                        // assign user to teacher object
+                        user.setProperty("teacher", teacher);
+                        // save teacher object to backendless
+                        Backendless.Data.of( Teacher.class).save( teacher, new AsyncCallback<Teacher>() {
+                            public void handleResponse( Teacher response )
                             {
                                 // new Contact instance has been saved
                                 Backendless.UserService.register(user, new AsyncCallback<BackendlessUser>() {
@@ -142,10 +146,12 @@ public class Register extends AppCompatActivity {
                         Backendless.initApp( getApplicationContext(),"BC11B438-4778-DDBA-FF6C-BFECE07FA900", "6CC41866-9B97-4E73-B787-328D1DABA6E7" );
 
                         Student student = new Student();
-                        student.name = name;
-                        student.user = user;
-                        Backendless.Data.of( "Student" ).save( student, new AsyncCallback<Map>() {
-                            public void handleResponse( Map response )
+                        student.setName(name);
+                        student.setUser(user);
+                        student.setMail(email);
+                        user.setProperty("student", student);
+                        Backendless.Data.of( Student.class ).save( student, new AsyncCallback<Student>() {
+                            public void handleResponse( Student response )
                             {
                                 // new User instance has been saved
                                 Backendless.UserService.register(user, new AsyncCallback<BackendlessUser>() {

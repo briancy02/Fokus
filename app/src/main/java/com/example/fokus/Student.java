@@ -11,14 +11,21 @@ import java.util.Map;
 import java.util.Set;
 
 public class Student extends Person implements Map {
+    public String name;
+    public BackendlessUser user;
+    public String objectId;
+
     public ArrayList<Class> classArrayList = new ArrayList<Class>();
 
     public Student(){
 
     }
+    public Student(String name, BackendlessUser user){
+        super(name, user);
+    }
 
-    public Student(String name, BackendlessUser user, String objectId, ArrayList<Class> classArrayList){
-        super(name, user, objectId);
+    public Student(String name, BackendlessUser user, String objectId, String mail, ArrayList<Class> classArrayList){
+        super(name, user, objectId, mail);
         this.classArrayList = classArrayList;
     }
 
