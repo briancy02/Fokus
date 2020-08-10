@@ -64,8 +64,15 @@ public class Login extends AppCompatActivity {
                         public void handleResponse(BackendlessUser response) {
                             // if login was successful return to main activity
                             Toast.makeText(Login.this, "Logged in successfully", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(Login.this, MainActivity.class));
+                            if(Backendless.UserService.CurrentUser().getProperty("title").equals("teacher")){
+                                startActivity(new Intent(Login.this, StudentMain.class));
+                            }
+                            else{
+                                startActivity(new Intent(Login.this, TeacherMain.class));
+                            }
                             Login.this.finish();
+
+
 
                         }
 
