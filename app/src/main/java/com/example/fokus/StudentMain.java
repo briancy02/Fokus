@@ -32,35 +32,27 @@ public class StudentMain extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_main);
 
-        btnDueDate = (Button) findViewById(R.id.btnDueDate);
+//        btnDueDate = (Button) findViewById(R.id.btnDueDate);
 
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
         tvLoad = findViewById(R.id.tvLoad);
+    }
 
 
 
 
         // When Due Date is clicked
-        btnDueDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Takes student to the video assignment
+//        btnDueDate.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                // Takes student to the video assignment
+//
+//
+//                }
 
 
-                }
-
-
-        });
-
-
-
-
-
-
-
-    }
     /**
      * Shows the progress UI and hides the login form.
      */

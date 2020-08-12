@@ -19,6 +19,7 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".TeacherMain"/>
         <activity android:name=".StudentMain"/>
+        <activity android:name=".NewAssignment"/>
 
         <activity android:name=".Login">
             <intent-filter>

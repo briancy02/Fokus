@@ -65,10 +65,10 @@ public class Login extends AppCompatActivity {
                             // if login was successful return to main activity
                             Toast.makeText(Login.this, "Logged in successfully", Toast.LENGTH_SHORT).show();
                             if(Backendless.UserService.CurrentUser().getProperty("title").equals("teacher")){
-                                startActivity(new Intent(Login.this, StudentMain.class));
+                                startActivity(new Intent(Login.this, TeacherMain.class));
                             }
                             else{
-                                startActivity(new Intent(Login.this, TeacherMain.class));
+                                startActivity(new Intent(Login.this, StudentMain.class));
                             }
                             Login.this.finish();
 

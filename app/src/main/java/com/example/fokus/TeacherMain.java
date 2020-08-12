@@ -28,14 +28,15 @@ public class TeacherMain extends AppCompatActivity {
     Button btnViewAssign, btnNewAssign;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teacher_main);
 
-        btnViewAssign = (Button) findViewById(R.id.btnViewAssign);
+        btnViewAssign = findViewById(R.id.btnViewAssign);
 
-        btnNewAssign = (Button) findViewById(R.id.btnNewAssign);
+        btnNewAssign = findViewById(R.id.btnNewAssign);
 
 
         mLoginFormView = findViewById(R.id.login_form);
@@ -65,7 +66,7 @@ public class TeacherMain extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // Takes student to their profile
-
+                startActivity(new Intent(TeacherMain.this, NewAssignment.class));
 
             }
 
