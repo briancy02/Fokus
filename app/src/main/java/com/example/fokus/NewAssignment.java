@@ -70,45 +70,45 @@ public class NewAssignment extends AppCompatActivity{
                     ArrayList<Student> students = new ArrayList<Student>();
                     ArrayList<Assignment> assignments = new ArrayList<Assignment>();
                     System.out.println(Backendless.UserService.CurrentUser().getProperty("title"));
-//                    System.out.println(teacher.mail);
-//                    Object[] studentsObjectArray = (Object[]) Backendless.UserService.CurrentUser().getProperty("students");
-//                    Student[] studentsArray;
-//                    //System.out.println(studentsObjectArray[0]);
-//
-//                    // if array is not empty, it can be cast to an array of specific type
-//                    if (studentsObjectArray != null && studentsObjectArray.length > 0) {
-//                        studentsArray = (Student[]) studentsObjectArray;
-//                        System.out.println("in loop");
-//                        for(int i = 0; i < studentsArray.length; i++) {
-//
-//                            Assignment assignment = new Assignment();
-//                            assignment.setAssignmentName(assignmentName);
-//                            assignment.setDueDate(dueDate);
-//                            assignment.setDescription(description);
-//                            assignment.setYoutubeLink(youtubeURL);
-//                            assignment.setTeacher(teacher);
-//                            assignment.setStudent(studentsArray[i]);
-//                            assignments.add(assignment);
-//                        }
-//                    }
-//
-//                    //Object[] assignmentsArray = assignments.toArray();
-//                    System.out.println("out of loop");
-//                    System.out.println(assignments.get(0));
-//                    Backendless.Data.of(Assignment.class).create(assignments, new AsyncCallback<List<String>>() {
-//
-//                        @Override
-//                        public void handleResponse(List<String> ids) {
-//                            for (String id : ids) {
-//                                Log.i("NewAssignment", "Order object has been saved with ID - " + id);
-//                            }
-//                        }
-//
-//                        @Override
-//                        public void handleFault(BackendlessFault fault) {
-//                            Log.e("NewAssignment", fault.getMessage());
-//                        }
-//                    });
+                    System.out.println(teacher.mail);
+                    Object[] studentsObjectArray = (Object[]) Backendless.UserService.CurrentUser().getProperty("students");
+                    Student[] studentsArray;
+                    //System.out.println(studentsObjectArray[0]);
+
+                    // if array is not empty, it can be cast to an array of specific type
+                    if (studentsObjectArray != null && studentsObjectArray.length > 0) {
+                        studentsArray = (Student[]) studentsObjectArray;
+                        System.out.println("in loop");
+                        for(int i = 0; i < studentsArray.length; i++) {
+
+                            Assignment assignment = new Assignment();
+                            assignment.setAssignmentName(assignmentName);
+                            assignment.setDueDate(dueDate);
+                            assignment.setDescription(description);
+                            assignment.setYoutubeLink(youtubeURL);
+                            assignment.setTeacher(teacher);
+                            assignment.setStudent(studentsArray[i]);
+                            assignments.add(assignment);
+                        }
+                    }
+
+                    //Object[] assignmentsArray = assignments.toArray();
+                    System.out.println("out of loop");
+                    System.out.println(assignments.get(0));
+                    Backendless.Data.of(Assignment.class).create(assignments, new AsyncCallback<List<String>>() {
+
+                        @Override
+                        public void handleResponse(List<String> ids) {
+                            for (String id : ids) {
+                                Log.i("NewAssignment", "Order object has been saved with ID - " + id);
+                            }
+                        }
+
+                        @Override
+                        public void handleFault(BackendlessFault fault) {
+                            Log.e("NewAssignment", fault.getMessage());
+                        }
+                    });
 
 
                 }
