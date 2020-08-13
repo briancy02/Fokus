@@ -1,6 +1,8 @@
 package com.example.fokus;
 
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -23,8 +25,8 @@ public class TeacherMain extends AppCompatActivity {
     private View mProgressView;
     private View mLoginFormView;
     private TextView tvLoad;
-
-
+    private DrawerLayout menu;
+    private ActionBarDrawerToggle nToggle;
     Button btnViewAssign, btnNewAssign;
 
 
@@ -33,6 +35,7 @@ public class TeacherMain extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teacher_main);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         btnViewAssign = (Button) findViewById(R.id.btnViewAssign);
 
         btnNewAssign = (Button) findViewById(R.id.btnNewAssign);
