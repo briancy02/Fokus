@@ -5,24 +5,28 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.backendless.Backendless;
-import com.backendless.BackendlessUser;
 import com.backendless.async.callback.AsyncCallback;
 import com.backendless.exceptions.BackendlessFault;
+import com.backendless.persistence.DataQueryBuilder;
+
+import java.util.List;
 
 public class StudentMain extends AppCompatActivity {
     private View mProgressView;
     private View mLoginFormView;
     private TextView tvLoad;
+    AssignmentsArrayAdapter adapter;
+
+    ListView lvList;
 
 
     Button btnDueDate;
@@ -32,12 +36,43 @@ public class StudentMain extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_main);
 
+
+
 //        btnDueDate = (Button) findViewById(R.id.btnDueDate);
 
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
         tvLoad = findViewById(R.id.tvLoad);
+
+        lvList = findViewById(R.id.LvList);
+
+        String whereClause = "studentEmail = '" + Backendless.UserService.CurrentUser().getEmail() + "'";
+        DataQueryBuilder queryBuilder = DataQueryBuilder.create();
+        queryBuilder.setWhereClause(whereClause);
+        queryBuilder.setGroupBy("dueDate");
+
+        showProgress(true);
+        tvLoad.setText("Getting all assignments... please wait...");
+
+        Backendless.Persistence.of(Assignment.class).find(queryBuilder, new AsyncCallback<List<Assignment>>() {
+            @Override
+            public void handleResponse(List<Assignment> response) {
+                ApplicationClass.assignments = response;
+
+                adapter = new AssignmentsArrayAdapter(StudentMain.this, ApplicationClass.assignments);
+                lvList.setAdapter(adapter);
+                showProgress(false);
+            }
+
+            @Override
+            public void handleFault(BackendlessFault fault) {
+                Toast.makeText(StudentMain.this, "Error: " + fault.getMessage(), Toast.LENGTH_SHORT).show();
+                showProgress(false);
+
+            }
+        });
+
     }
 
 

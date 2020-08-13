@@ -52,20 +52,21 @@
             android:inputType="textPersonName" />
 
         <EditText
-            android:id="@+id/etDueDate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Due Date (mm/dd/yy)"
-            android:inputType="textPersonName" />
-
-        <EditText
             android:id="@+id/etYoutubeURL"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Youtube URL"
-            android:inputType="date" />
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/etDueDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="etDueDate"
+            android:inputType="date"
+            tools:text="@tools:sample/date/mmddyy" />
 
         <VideoView
             android:id="@+id/videoView2"

@@ -66,17 +66,22 @@ public class NewAssignment extends AppCompatActivity{
                     String description = etDescription.getText().toString().trim();
                     String youtubeURL = etYoutubeURL.getText().toString().trim();
 
+                    // this doesnt retrieve the teacher object
                     Teacher teacher = (Teacher) Backendless.UserService.CurrentUser().getProperty("teacher");
+                    Object[] teacherObjectArray = (Object[]) Backendless.UserService.CurrentUser().getProperty("teacher");
+
                     ArrayList<Student> students = new ArrayList<Student>();
                     ArrayList<Assignment> assignments = new ArrayList<Assignment>();
                     System.out.println(Backendless.UserService.CurrentUser().getProperty("title"));
                     //System.out.println(teacher.mail);
-                    //Object[] studentsObjectArray = (Object[]) Backendless.UserService.CurrentUser().getProperty("students");
+
                     //Student[] studentsArray;
                     String studentEmail = String.valueOf(Backendless.UserService.CurrentUser().getProperty("studentEmail"));
                     System.out.println(studentEmail);
                     System.out.println(Backendless.UserService.CurrentUser().getProperty("studentEmail"));
 
+
+                    // This is the code for the work around
                     String[] studentEmailArray = studentEmail.split(",");
                     for(int i = 0; i < studentEmailArray.length; i++){
                         Assignment assignment = new Assignment();
@@ -95,6 +100,7 @@ public class NewAssignment extends AppCompatActivity{
                         public void handleResponse(List<String> ids) {
                             for (String id : ids) {
                                 Log.i("NewAssignment", "Order object has been saved with ID - " + id);
+                                NewAssignment.this.finish();
                             }
                         }
 
@@ -107,7 +113,9 @@ public class NewAssignment extends AppCompatActivity{
 
                     //System.out.println(studentsObjectArray[0]);
 
+                    // Look at this code
                     // if array is not empty, it can be cast to an array of specific type
+                    //Object[] studentsObjectArray = (Object[]) Backendless.UserService.CurrentUser().getProperty("students");
 //                    if (studentsObjectArray != null && studentsObjectArray.length > 0) {
 //                        studentsArray = (Student[]) studentsObjectArray;
 //                        System.out.println("in loop");
@@ -127,6 +135,7 @@ public class NewAssignment extends AppCompatActivity{
 //                    //Object[] assignmentsArray = assignments.toArray();
 //                    System.out.println("out of loop");
 //                    System.out.println(assignments.get(0));
+                    //this part is just creating the assignment
 //                    Backendless.Data.of(Assignment.class).create(assignments, new AsyncCallback<List<String>>() {
 //
 //                        @Override

@@ -12,6 +12,7 @@ public class Assignment {
     String dueDate;
     Boolean complete;
     String studentEmail;
+    String teacherEmail;
 
     public Assignment(){
         
@@ -103,5 +104,13 @@ public class Assignment {
 
     public void setStudentEmail(String studentEmail) {
         this.studentEmail = studentEmail;
+    }
+
+    public String getTeacherEmail() {
+        return teacherEmail;
+    }
+
+    public void setTeacherEmail(String teacherEmail) {
+        this.teacherEmail = teacherEmail;
     }
 }

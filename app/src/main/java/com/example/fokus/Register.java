@@ -78,6 +78,7 @@ public class Register extends AppCompatActivity {
                         teacher.setMail(email);
                         showProgress(true);
                         // assign user to teacher object
+                        // This is where I created the relationship
                         user.setProperty("teacher", teacher);
                         // save teacher object to backendless
                         Backendless.Data.of( Teacher.class).save( teacher, new AsyncCallback<Teacher>() {
