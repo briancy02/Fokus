@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,7 +20,7 @@ public class QuestionArrayAdapter extends ArrayAdapter<Response>{
 
     public QuestionArrayAdapter(Context context, List<Response> list)
     {
-        super(context, R.layout.row_layout, list);
+        super(context, R.layout.row_question_layout, list);
         this.context = context;
         this.responses = list;
 
@@ -29,18 +30,20 @@ public class QuestionArrayAdapter extends ArrayAdapter<Response>{
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
+
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        convertView = inflater.inflate(R.layout.row_layout, parent, false);
-        TextView tvAssignmentName = convertView.findViewById(R.id.tvAssignmentName);
-        TextView tvAssignmentDescription = convertView.findViewById(R.id.tvAssignmentDescription);
-        TextView tvTeacher = convertView.findViewById(R.id.tvTeacher);
-        ImageView ivVideo = convertView.findViewById(R.id.ivVideo);
+        convertView = inflater.inflate(R.layout.row_question_layout, parent, false);
+        TextView tvQuestionNumber = convertView.findViewById(R.id.tvQuestionNumber);
+        TextView tvQuestion = convertView.findViewById(R.id.tvQuestion);
+        EditText etStudentAnswer = convertView.findViewById(R.id.etStudentAnswer);
 
-        tvAssignmentName.setText(assignments.get(position).getAssignmentName() + "");
-        tvTeacher.setText(assignments.get(position).getTeacherEmail() + "");
-        tvAssignmentDescription.setText(assignments.get(position).getDescription());
-        ivVideo.setImageResource(R.mipmap.video_player_foreground);
+        tvQuestionNumber.setText("Question " + (position+1));
+        tvQuestion.setText(responses.get(position).getQuestion()+ "");
+        responses.get(position).setAnswerStudent(etStudentAnswer.getText().toString().trim());
+
+
+
 
         return convertView;
     }

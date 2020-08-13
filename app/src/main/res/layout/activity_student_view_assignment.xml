@@ -30,35 +30,26 @@
         android:visibility="gone" />
 
     <LinearLayout
+        android:id="@+id/login_form"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/login_form"
         android:orientation="vertical">
 
         <Button
-            android:id="@+id/btnView"
+            android:id="@+id/btnSubmitAssignment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="New Assignment"
+            android:text="Submit Assignment"
             tools:layout_editor_absoluteX="181dp"
             tools:layout_editor_absoluteY="106dp" />
 
-        <Button
-            android:id="@+id/btnViewAssign"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="View Assignments"
-            tools:layout_editor_absoluteX="181dp"
-            tools:layout_editor_absoluteY="206dp" />
-
         <ListView
-            android:id="@+id/LvList"
+            android:id="@+id/LvQuestionList"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
 
     </LinearLayout>
-
 
 
 </LinearLayout>

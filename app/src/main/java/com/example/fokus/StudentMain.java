@@ -50,14 +50,7 @@ public class StudentMain extends AppCompatActivity {
 
         lvList = findViewById(R.id.LvList);
 
-        lvList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(StudentMain.this, StudentViewAssignment.class);
-                intent.putExtra("index", i);
-                startActivityForResult(intent, 1);
-            }
-        });
+
 
         String whereClause = "studentEmail = '" + Backendless.UserService.CurrentUser().getEmail() + "'";
         DataQueryBuilder queryBuilder = DataQueryBuilder.create();
@@ -82,6 +75,17 @@ public class StudentMain extends AppCompatActivity {
                 Toast.makeText(StudentMain.this, "Error: " + fault.getMessage(), Toast.LENGTH_SHORT).show();
                 showProgress(false);
 
+            }
+        });
+
+        lvList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+
+                Intent intent = new Intent(StudentMain.this, StudentViewAssignment.class);
+                intent.putExtra("index", i);
+                startActivityForResult(intent, 1);
             }
         });
 

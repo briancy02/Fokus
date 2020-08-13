@@ -9,6 +9,17 @@ public class Response {
 
     }
 
+    public Response(String question, String answerCorrect){
+        this.question = question;
+        this.answerCorrect = answerCorrect;
+    }
+
+    public Response(String question, String answerCorrect, String answerStudent){
+        this.question = question;
+        this.answerCorrect = answerCorrect;
+        this.answerStudent = answerStudent;
+    }
+
     public String getQuestion() {
         return question;
     }
