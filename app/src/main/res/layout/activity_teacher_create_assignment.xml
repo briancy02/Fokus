@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".StudentMain">
+    tools:context=".TeacherViewAssignment">
 
     <ProgressBar
         android:id="@+id/login_progress"
@@ -30,20 +30,26 @@
         android:visibility="gone" />
 
     <LinearLayout
+        android:id="@+id/login_form"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/login_form"
         android:orientation="vertical">
 
+        <Button
+            android:id="@+id/btnCreateAssignment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Create Assignment"
+            tools:layout_editor_absoluteX="181dp"
+            tools:layout_editor_absoluteY="106dp" />
 
         <ListView
-            android:id="@+id/LvList"
+            android:id="@+id/LvQuestionListTeacher"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
 
     </LinearLayout>
-
 
 
 </LinearLayout>
