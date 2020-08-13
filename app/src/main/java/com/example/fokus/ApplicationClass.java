@@ -12,6 +12,7 @@ public class ApplicationClass extends Application {
     public static final String SERVER_URL = "http://api.backendless.com";
 
     public static List<Assignment> assignments;
+    public static List<Response> responses;
     @Override
     public void onCreate() {
         super.onCreate();

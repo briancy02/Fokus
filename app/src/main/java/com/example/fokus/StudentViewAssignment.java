@@ -1,29 +1,18 @@
 package com.example.fokus;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.backendless.Backendless;
-import com.backendless.async.callback.AsyncCallback;
-import com.backendless.exceptions.BackendlessFault;
-import com.backendless.persistence.DataQueryBuilder;
+import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.List;
-
-public class StudentMain extends AppCompatActivity {
+public class StudentViewAssignment extends AppCompatActivity{
     private View mProgressView;
     private View mLoginFormView;
     private TextView tvLoad;
@@ -37,8 +26,7 @@ public class StudentMain extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_student_main);
-
+        setContentView(R.layout.activity_student_view_assignment);
 
 
 //        btnDueDate = (Button) findViewById(R.id.btnDueDate);
@@ -47,59 +35,7 @@ public class StudentMain extends AppCompatActivity {
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
         tvLoad = findViewById(R.id.tvLoad);
-
-        lvList = findViewById(R.id.LvList);
-
-        lvList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(StudentMain.this, StudentViewAssignment.class);
-                intent.putExtra("index", i);
-                startActivityForResult(intent, 1);
-            }
-        });
-
-        String whereClause = "studentEmail = '" + Backendless.UserService.CurrentUser().getEmail() + "'";
-        DataQueryBuilder queryBuilder = DataQueryBuilder.create();
-        queryBuilder.setWhereClause(whereClause);
-        queryBuilder.setGroupBy("dueDate");
-
-        showProgress(true);
-        tvLoad.setText("Getting all assignments... please wait...");
-
-        Backendless.Persistence.of(Assignment.class).find(queryBuilder, new AsyncCallback<List<Assignment>>() {
-            @Override
-            public void handleResponse(List<Assignment> response) {
-                ApplicationClass.assignments = response;
-
-                adapter = new AssignmentsArrayAdapter(StudentMain.this, ApplicationClass.assignments);
-                lvList.setAdapter(adapter);
-                showProgress(false);
-            }
-
-            @Override
-            public void handleFault(BackendlessFault fault) {
-                Toast.makeText(StudentMain.this, "Error: " + fault.getMessage(), Toast.LENGTH_SHORT).show();
-                showProgress(false);
-
-            }
-        });
-
-
-
-
-
     }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if( requestCode ==1){
-            adapter.notifyDataSetChanged();
-        }
-    }
-
     /**
      * Shows the progress UI and hides the login form.
      */
