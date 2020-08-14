@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,7 +33,7 @@ public class TeacherMain extends AppCompatActivity {
     private TextView tvLoad;
 
 
-    Button btnNewAssign;
+    ImageView btnNewAssign;
     AssignmentsArrayAdapter adapter;
 
     ListView lvListTeacher;
