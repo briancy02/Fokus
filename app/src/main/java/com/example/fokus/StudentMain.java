@@ -93,7 +93,7 @@ public class StudentMain extends AppCompatActivity {
         queryBuilder.setWhereClause(whereClause);
         queryBuilder.setGroupBy("dueDate");
 
-        showProgress(true);
+        //showProgress(true);
         tvLoad.setText("Getting all assignments... please wait...");
 
         Backendless.Persistence.of(Assignment.class).find(queryBuilder, new AsyncCallback<List<Assignment>>() {
@@ -103,13 +103,13 @@ public class StudentMain extends AppCompatActivity {
 
                 adapter = new AssignmentsArrayAdapter(StudentMain.this, ApplicationClass.assignments);
                 lvList.setAdapter(adapter);
-                showProgress(false);
+                //showProgress(false);
             }
 
             @Override
             public void handleFault(BackendlessFault fault) {
                 Toast.makeText(StudentMain.this, "Error: " + fault.getMessage(), Toast.LENGTH_SHORT).show();
-                showProgress(false);
+                //showProgress(false);
 
             }
         });
