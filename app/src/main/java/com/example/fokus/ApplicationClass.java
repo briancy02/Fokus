@@ -15,6 +15,7 @@ public class ApplicationClass extends Application {
     public static List<Assignment> assignments;
     public static ArrayList<Response> responses = new ArrayList<Response>();
     public static List<Question> questions;
+    public static List<String> emails;
     @Override
     public void onCreate() {
         super.onCreate();

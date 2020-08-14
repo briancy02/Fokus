@@ -35,6 +35,15 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+            android:id="@+id/youtube_player_view"
+            android:layout_width="match_parent"
+            android:layout_height="258dp"
+
+            app:autoPlay="true"
+            app:showFullScreenButton="false"
+            app:videoId="S0Q4gqBUs7c" />
+
         <Button
             android:id="@+id/btnSubmitAssignment"
             android:layout_width="wrap_content"

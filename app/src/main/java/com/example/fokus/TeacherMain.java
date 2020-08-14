@@ -35,6 +35,7 @@ public class TeacherMain extends AppCompatActivity {
 
     ImageView btnNewAssign;
     AssignmentsArrayAdapter adapter;
+    ImageView btnViewStudents;
 
     ListView lvListTeacher;
 
@@ -44,6 +45,7 @@ public class TeacherMain extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teacher_main);
         btnNewAssign = findViewById(R.id.btnNewAssign);
+        btnViewStudents = findViewById(R.id.btnViewStudents);
 
 
         mLoginFormView = findViewById(R.id.login_form);
@@ -95,13 +97,21 @@ public class TeacherMain extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-
                 // Teacher View Assignment unlike student view should be results of students
                 Intent intent = new Intent(TeacherMain.this, TeacherViewAssignment.class);
                 intent.putExtra("index", i);
                 startActivityForResult(intent, 1);
             }
         });
+
+        btnViewStudents.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(TeacherMain.this, TeacherEmails.class));
+            }
+        });
+
+
 
 
 

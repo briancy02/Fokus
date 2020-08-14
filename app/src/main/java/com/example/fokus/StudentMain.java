@@ -18,6 +18,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,6 +32,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class StudentMain extends AppCompatActivity {
@@ -40,6 +42,7 @@ public class StudentMain extends AppCompatActivity {
     AssignmentsArrayAdapter adapter;
 
     ListView lvList;
+    ImageView btnViewTeachers;
     private DrawerLayout drawer;
     private NavigationView mDrawerLayout;
 
@@ -85,6 +88,7 @@ public class StudentMain extends AppCompatActivity {
         tvLoad = findViewById(R.id.tvLoad);
 
         lvList = findViewById(R.id.LvList);
+        btnViewTeachers = findViewById(R.id.btnViewTeachers);
 
 
 
@@ -124,6 +128,15 @@ public class StudentMain extends AppCompatActivity {
                 startActivityForResult(intent, 1);
             }
         });
+
+        btnViewTeachers.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(StudentMain.this, StudentEmails.class));
+            }
+        });
+
+
 
 
 
