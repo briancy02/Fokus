@@ -121,7 +121,7 @@
             android:layout_alignParentEnd="true"
             android:layout_marginTop="-2dp"
             android:layout_marginEnd="90dp"
-            app:srcCompat="@mipmap/welcome_to_fokus" />
+            app:srcCompat="@mipmap/welcome_to_fokus_hq" />
 
         <ImageView
             android:id="@+id/imageView5"
