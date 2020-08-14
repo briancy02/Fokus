@@ -30,7 +30,7 @@ public class StudentViewAssignment extends AppCompatActivity{
     ListView lvQuestionList;
 
 
-    Button btnDueDate;
+    Button btnSubmitAssignment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,30 +46,63 @@ public class StudentViewAssignment extends AppCompatActivity{
         tvLoad = findViewById(R.id.tvLoad);
 
         lvQuestionList = findViewById(R.id.LvQuestionList);
-
-        final int index = getIntent().getIntExtra("index", 0);
-
-        String question = ApplicationClass.assignments.get(index).question;
-        System.out.println(question);
-        String[] questionArray = question.split("//");
-        String answerCorrect = ApplicationClass.assignments.get(index).answerCorrect;
-        String[] answerCorrectArray = answerCorrect.split("//");
-
-        ArrayList<Response> responseArrayList = new ArrayList<Response>();
-
-        for(int i = 0; i < answerCorrectArray.length; i++){
-            Response response = new Response(questionArray[i], answerCorrectArray[i]);
-            responseArrayList.add(response);
-        }
+        btnSubmitAssignment = findViewById(R.id.btnSubmitAssignment);
 
 
-        ApplicationClass.responses = responseArrayList;
 
-        adapter = new QuestionArrayAdapter( StudentViewAssignment.this, ApplicationClass.responses);
-        lvQuestionList.setAdapter(adapter);
-        showProgress(false);
+        btnSubmitAssignment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showProgress(true);
 
-        StudentViewAssignment.this.finish();
+                final int index = getIntent().getIntExtra("index", 0);
+
+                String question = ApplicationClass.assignments.get(index).question;
+                System.out.println(question);
+                String[] questionArray = question.split("//");
+                String answerCorrect = ApplicationClass.assignments.get(index).answerCorrect;
+                String[] answerCorrectArray = answerCorrect.split("//");
+
+                ArrayList<Response> responseArrayList = new ArrayList<Response>();
+
+
+
+                for(int i = 0; i < answerCorrectArray.length; i++){
+                    Response response = new Response(questionArray[i], answerCorrectArray[i]);
+                    responseArrayList.add(response);
+                }
+
+
+                ApplicationClass.responses = responseArrayList;
+
+                adapter = new QuestionArrayAdapter( StudentViewAssignment.this, ApplicationClass.responses);
+                lvQuestionList.setAdapter(adapter);
+
+                // put all answers in responses object list
+                int rawScore = 0;
+                for(int i = 0; i < ApplicationClass.responses.size(); i++){
+                    if(ApplicationClass.responses.get(i).getAnswerCorrect().equals(ApplicationClass.responses.get(i).getAnswerCorrect())){
+                        rawScore++;
+                    }
+                }
+
+                String score = rawScore + " / " + questionArray.length;
+                ApplicationClass.assignments.get(index).setScore(score);
+                // probably need a screen that just displays the student's score.
+                // now get started with student score list view for teachers using another adapter view
+
+                showProgress(false);
+                System.out.println(score);
+
+                StudentViewAssignment.this.finish();
+
+
+            }
+        });
+
+
+
+
 
     }
     /**
