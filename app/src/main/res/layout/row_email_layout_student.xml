@@ -12,7 +12,7 @@
 
         <RelativeLayout
             android:layout_width="223dp"
-            android:layout_height="160dp"
+            android:layout_height="57dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_marginStart="89dp"
@@ -28,16 +28,6 @@
                 android:textSize="18dp" />
 
         </RelativeLayout>
-
-        <ImageView
-            android:id="@+id/imageView11"
-            android:layout_width="169dp"
-            android:layout_height="99dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="115dp"
-            android:layout_marginTop="7dp"
-            app:srcCompat="@mipmap/fokus_logo" />
 
     </RelativeLayout>
 </RelativeLayout>

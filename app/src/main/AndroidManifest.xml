@@ -24,7 +24,6 @@
         <activity android:name=".NewAssignment" />
         <activity android:name=".StudentViewAssignment" />
         <activity android:name=".TeacherCreateAssignment" />
-        <activity android:name=".TeacherEmails"/>
         <activity android:name=".StudentEmails"/>
         <activity android:name=".Login">
             <intent-filter>

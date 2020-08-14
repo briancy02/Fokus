@@ -100,33 +100,14 @@ public class TeacherMain extends AppCompatActivity {
                 // Teacher View Assignment unlike student view should be results of students
                 Intent intent = new Intent(TeacherMain.this, TeacherViewAssignment.class);
                 intent.putExtra("index", i);
-                startActivityForResult(intent, 1);
-            }
-        });
-
-        btnViewStudents.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(TeacherMain.this, TeacherEmails.class));
             }
         });
 
 
 
 
-
-
-
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if( requestCode ==1){
-            adapter.notifyDataSetChanged();
-        }
-    }
 
     /**
      * Shows the progress UI and hides the login form.

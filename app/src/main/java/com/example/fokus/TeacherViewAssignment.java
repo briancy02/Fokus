@@ -7,6 +7,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -19,22 +20,19 @@ public class TeacherViewAssignment extends AppCompatActivity{
         AssignmentsArrayAdapter adapter;
 
         ListView lvList;
+        ImageView imageView8;
+        ImageView imageView10;
 
-
-        Button btnDueDate;
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_teacher_view_assignment);
-
-
-//        btnDueDate = (Button) findViewById(R.id.btnDueDate);
-
-
             mLoginFormView = findViewById(R.id.login_form);
             mProgressView = findViewById(R.id.login_progress);
             tvLoad = findViewById(R.id.tvLoad);
+            imageView8 = findViewById(R.id.imageView8);
+            imageView10 = findViewById(R.id.imageView10);
         }
     /**
      * Shows the progress UI and hides the login form.
