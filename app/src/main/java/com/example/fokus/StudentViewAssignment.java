@@ -10,13 +10,22 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.utils.YouTubePlayerUtils;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.YouTubePlayerFullScreenListener;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.ui.PlayerUiController;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.ui.menu.MenuItem;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.backendless.Backendless;
 import com.backendless.async.callback.AsyncCallback;
 import com.backendless.exceptions.BackendlessFault;
 import com.backendless.persistence.DataQueryBuilder;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
 
 import java.sql.SQLOutput;
 import java.util.ArrayList;
@@ -27,6 +36,7 @@ public class StudentViewAssignment extends AppCompatActivity{
     private View mLoginFormView;
     private TextView tvLoad;
     QuestionArrayAdapter adapter;
+    private YouTubePlayerView youTubePlayerView;
 
     ListView lvQuestionList;
 
@@ -37,6 +47,7 @@ public class StudentViewAssignment extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_view_assignment);
+
 
 
 //        btnDueDate = (Button) findViewById(R.id.btnDueDate);
@@ -74,6 +85,16 @@ public class StudentViewAssignment extends AppCompatActivity{
         System.out.println(ApplicationClass.responses.get(0).getAnswerStudent());
         adapter = new QuestionArrayAdapter( StudentViewAssignment.this, ApplicationClass.responses);
         lvQuestionList.setAdapter(adapter);
+        youTubePlayerView = findViewById(R.id.youtube_player_view);
+        getLifecycle().addObserver(youTubePlayerView);
+        youTubePlayerView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
+            @Override
+            public void onReady(@NonNull YouTubePlayer youTubePlayer) {
+                String videoId = ApplicationClass.assignments.get(index).getYoutubeLink().substring(17);
+                System.out.println(videoId);
+                youTubePlayer.loadVideo(videoId, 0);
+            }
+        });
 
         // put all answers in responses object list
         int rawScore = 0;
