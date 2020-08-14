@@ -6,14 +6,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Button
+    <ImageView
         android:id="@+id/btnSubmitS"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Submit"
+        android:layout_width="814dp"
+        android:layout_height="398dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="636dp" />
+        app:srcCompat="@mipmap/submit_assignment_button"
+        tools:layout_editor_absoluteY="488dp" />
 
     <VideoView
         android:id="@+id/v1"
