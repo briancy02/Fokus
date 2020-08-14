@@ -40,7 +40,7 @@ public class QuestionArrayAdapter extends ArrayAdapter<Response>{
 
         tvQuestionNumber.setText("Question " + (position+1));
         tvQuestion.setText(responses.get(position).getQuestion()+ "");
-        responses.get(position).setAnswerStudent(etStudentAnswer.getText().toString().trim());
+        ApplicationClass.responses.get(position).setAnswerStudent(etStudentAnswer.getText().toString().trim());
 
 
 

@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.backendless.Backendless;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ApplicationClass extends Application {
@@ -12,7 +13,7 @@ public class ApplicationClass extends Application {
     public static final String SERVER_URL = "http://api.backendless.com";
 
     public static List<Assignment> assignments;
-    public static List<Response> responses;
+    public static ArrayList<Response> responses = new ArrayList<Response>();
     public static List<Question> questions;
     @Override
     public void onCreate() {

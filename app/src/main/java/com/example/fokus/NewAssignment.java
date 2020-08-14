@@ -1,14 +1,8 @@
 package com.example.fokus;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.annotation.TargetApi;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -18,12 +12,9 @@ import android.widget.Toast;
 import android.widget.VideoView;
 
 import com.backendless.Backendless;
-import com.backendless.BackendlessUser;
-import com.backendless.Persistence;
 import com.backendless.async.callback.AsyncCallback;
 import com.backendless.exceptions.BackendlessFault;
 import com.backendless.persistence.DataQueryBuilder;
-import com.backendless.util.JSONUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,59 +52,88 @@ public class NewAssignment extends AppCompatActivity{
                     Toast.makeText(NewAssignment.this, "Please enter all details", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    String assignmentName = etAssignmentName.getText().toString().trim();
-                    String dueDate = etDueDate.getText().toString().trim();
-                    String description = etDescription.getText().toString().trim();
+                    final String assignmentName = etAssignmentName.getText().toString().trim();
+                    final String dueDate = etDueDate.getText().toString().trim();
+                    final String description = etDescription.getText().toString().trim();
                     final String youtubeURL = etYoutubeURL.getText().toString().trim();
+                    System.out.println(youtubeURL);
 
                     // this doesnt retrieve the teacher object
-                    Teacher teacher = (Teacher) Backendless.UserService.CurrentUser().getProperty("teacher");
+                    final Teacher teacher = (Teacher) Backendless.UserService.CurrentUser().getProperty("teacher");
                     Object[] teacherObjectArray = (Object[]) Backendless.UserService.CurrentUser().getProperty("teacher");
 
                     ArrayList<Student> students = new ArrayList<Student>();
-                    ArrayList<Assignment> assignments = new ArrayList<Assignment>();
+                    final ArrayList<Assignment> assignments = new ArrayList<Assignment>();
                     System.out.println(Backendless.UserService.CurrentUser().getProperty("title"));
                     //System.out.println(teacher.mail);
 
                     //Student[] studentsArray;
-                    String studentEmail = String.valueOf(Backendless.UserService.CurrentUser().getProperty("studentEmail"));
+                    final String studentEmail = String.valueOf(Backendless.UserService.CurrentUser().getProperty("studentEmail"));
                     System.out.println(studentEmail);
                     System.out.println(Backendless.UserService.CurrentUser().getProperty("studentEmail"));
 
 
-                    // This is the code for the work around
-                    String[] studentEmailArray = studentEmail.split(",");
-                    for(int i = 0; i < studentEmailArray.length; i++){
-                        Assignment assignment = new Assignment();
-                        assignment.setAssignmentName(assignmentName);
-                        assignment.setDueDate(dueDate);
-                        assignment.setDescription(description);
-                        assignment.setYoutubeLink(youtubeURL);
-                        assignment.setTeacher(teacher);
-                        assignment.setStudentEmail(studentEmail);
-                        assignment.setTeacherEmail(String.valueOf(Backendless.UserService.CurrentUser().getEmail()));
-                        assignments.add(assignment);
+                    String whereClause2 = "YoutubeURL = '" + youtubeURL + "'";
+                    DataQueryBuilder queryBuilder = DataQueryBuilder.create();
+                    queryBuilder.setWhereClause(whereClause2);
+                    System.out.println(whereClause2);
 
-                    }
-
-                    Backendless.Data.of(Assignment.class).create(assignments, new AsyncCallback<List<String>>() {
+                    Backendless.Persistence.of(Question.class).find(queryBuilder, new AsyncCallback<List<Question>>() {
                         @Override
-                        public void handleResponse(List<String> ids) {
-                            for (String id : ids) {
-                                Log.i("NewAssignment", "Order object has been saved with ID - " + id);
-                                //startActivity(new Intent(NewAssignment.this, TeacherCreateAssignment.class));
-                                Intent intent = new Intent(NewAssignment.this, TeacherCreateAssignment.class);
-                                intent.putExtra("youtubeURL", youtubeURL);
-                                startActivity(intent);
-                                NewAssignment.this.finish();
+                        public void handleResponse(List<Question> response) {
+                            ApplicationClass.questions = response;
+                            String[] studentEmailArray = studentEmail.split(",");
+                            for(int i = 0; i < studentEmailArray.length; i++){
+                                Assignment assignment = new Assignment();
+                                assignment.setAssignmentName(assignmentName);
+                                assignment.setDueDate(dueDate);
+                                assignment.setDescription(description);
+                                assignment.setYoutubeLink(youtubeURL);
+                                assignment.setTeacher(teacher);
+                                assignment.setStudentEmail(studentEmail);
+                                assignment.setQuestion(ApplicationClass.questions.get(0).getQuestion());
+                                System.out.println("Question in New Assignment:"+ ApplicationClass.questions.get(0).getQuestion());
+                                assignment.setAnswerCorrect(ApplicationClass.questions.get(0).getAnswerCorrect());
+                                assignment.setTeacherEmail(String.valueOf(Backendless.UserService.CurrentUser().getEmail()));
+                                assignments.add(assignment);
+
                             }
+
+                            Backendless.Data.of(Assignment.class).create(assignments, new AsyncCallback<List<String>>() {
+                                @Override
+                                public void handleResponse(List<String> ids) {
+                                    for (String id : ids) {
+                                        Log.i("NewAssignment", "Order object has been saved with ID - " + id);
+                                        //startActivity(new Intent(NewAssignment.this, TeacherCreateAssignment.class));
+                                        Intent intent = new Intent(NewAssignment.this, TeacherCreateAssignment.class);
+                                        intent.putExtra("youtubeURL", youtubeURL);
+                                        startActivity(intent);
+                                        NewAssignment.this.finish();
+                                    }
+                                }
+
+                                @Override
+                                public void handleFault(BackendlessFault fault) {
+                                    Log.e("NewAssignment", fault.getMessage());
+                                }
+                            });
+
+                            for(int i = 0; i < ApplicationClass.assignments.size(); i++){
+                                ApplicationClass.assignments.get(i).setQuestion(ApplicationClass.questions.get(0).getQuestion());
+                                ApplicationClass.assignments.get(i).setAnswerCorrect(ApplicationClass.questions.get(0).getAnswerCorrect());
+                            }
+
                         }
 
                         @Override
                         public void handleFault(BackendlessFault fault) {
-                            Log.e("NewAssignment", fault.getMessage());
+                            Toast.makeText(NewAssignment.this, "Error: " + fault.getMessage(), Toast.LENGTH_SHORT).show();
+                            //showProgress(false);
+
                         }
                     });
+                    // This is the code for the work around
+
 
 
                     //System.out.println(studentsObjectArray[0]);

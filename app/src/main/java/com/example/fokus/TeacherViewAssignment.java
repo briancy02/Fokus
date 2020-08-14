@@ -26,7 +26,7 @@ public class TeacherViewAssignment extends AppCompatActivity{
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_teacher_create_assignment);
+            setContentView(R.layout.activity_teacher_view_assignment);
 
 
 //        btnDueDate = (Button) findViewById(R.id.btnDueDate);

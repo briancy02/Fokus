@@ -18,6 +18,7 @@ import com.backendless.async.callback.AsyncCallback;
 import com.backendless.exceptions.BackendlessFault;
 import com.backendless.persistence.DataQueryBuilder;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,49 +51,58 @@ public class StudentViewAssignment extends AppCompatActivity{
 
 
 
+        final int index = getIntent().getIntExtra("index", 0);
+
+        final Assignment assignmentObject = ApplicationClass.assignments.get(index);
+
+        String question = ApplicationClass.assignments.get(index).question;
+        System.out.println(question);
+        final String[] questionArray = question.split("//");
+        final String answerCorrect = ApplicationClass.assignments.get(index).answerCorrect;
+        System.out.println(answerCorrect);
+        final String[] answerCorrectArray = answerCorrect.split("//");
+        System.out.println(answerCorrectArray.length);
+
+        ArrayList<Response> responseArrayList = new ArrayList<Response>();
+        for(int i = 0; i < answerCorrectArray.length; i++){
+            // works
+            Response response = new Response(questionArray[i], answerCorrectArray[i]);
+            responseArrayList.add(response);
+            ApplicationClass.responses.add(response);
+        }
+        //ApplicationClass.responses = responseArrayList;
+        System.out.println(responseArrayList.get(0).getAnswerCorrect());
+        System.out.println(ApplicationClass.responses.get(0).getAnswerStudent());
+        adapter = new QuestionArrayAdapter( StudentViewAssignment.this, ApplicationClass.responses);
+        lvQuestionList.setAdapter(adapter);
+
+        // put all answers in responses object list
+        int rawScore = 0;
+        System.out.println(answerCorrectArray.length);
+        System.out.println(ApplicationClass.responses.get(0).getAnswerStudent());
+
+
+        for(int i = 0; i < answerCorrectArray.length; i++){
+            if(ApplicationClass.responses.get(i).getAnswerStudent().equals(ApplicationClass.responses.get(i).getAnswerCorrect())){
+                System.out.println(ApplicationClass.responses.get(i).getAnswerStudent());
+                rawScore++;
+            }
+        }
+
+        String score = rawScore + " / " + questionArray.length;
+        assignmentObject.setScore(score);
+        // probably need a screen that just displays the student's score.
+        // now get started with student score list view for teachers using another adapter view
+
+        showProgress(false);
+        System.out.println(score);
+
+
+
         btnSubmitAssignment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showProgress(true);
-
-                final int index = getIntent().getIntExtra("index", 0);
-
-                String question = ApplicationClass.assignments.get(index).question;
-                System.out.println(question);
-                String[] questionArray = question.split("//");
-                String answerCorrect = ApplicationClass.assignments.get(index).answerCorrect;
-                String[] answerCorrectArray = answerCorrect.split("//");
-
-                ArrayList<Response> responseArrayList = new ArrayList<Response>();
-
-
-
-                for(int i = 0; i < answerCorrectArray.length; i++){
-                    Response response = new Response(questionArray[i], answerCorrectArray[i]);
-                    responseArrayList.add(response);
-                }
-
-
-                ApplicationClass.responses = responseArrayList;
-
-                adapter = new QuestionArrayAdapter( StudentViewAssignment.this, ApplicationClass.responses);
-                lvQuestionList.setAdapter(adapter);
-
-                // put all answers in responses object list
-                int rawScore = 0;
-                for(int i = 0; i < ApplicationClass.responses.size(); i++){
-                    if(ApplicationClass.responses.get(i).getAnswerCorrect().equals(ApplicationClass.responses.get(i).getAnswerCorrect())){
-                        rawScore++;
-                    }
-                }
-
-                String score = rawScore + " / " + questionArray.length;
-                ApplicationClass.assignments.get(index).setScore(score);
-                // probably need a screen that just displays the student's score.
-                // now get started with student score list view for teachers using another adapter view
-
-                showProgress(false);
-                System.out.println(score);
 
                 StudentViewAssignment.this.finish();
 

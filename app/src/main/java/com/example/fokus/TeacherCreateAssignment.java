@@ -28,6 +28,7 @@ public class TeacherCreateAssignment extends AppCompatActivity{
     QuestionArrayAdapterTeacher adapter;
 
     ListView lvQuestionListTeacher;
+    Button btnCreateAssignment;
 
 
     @Override
@@ -38,6 +39,8 @@ public class TeacherCreateAssignment extends AppCompatActivity{
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
         tvLoad = findViewById(R.id.tvLoad);
+
+        btnCreateAssignment = findViewById(R.id.btnCreateAssignment);
 
         lvQuestionListTeacher = findViewById(R.id.LvQuestionListTeacher);
 
@@ -66,12 +69,13 @@ public class TeacherCreateAssignment extends AppCompatActivity{
                     @Override
                     public void handleResponse(List<Question> response) {
                         ApplicationClass.questions = response;
-                        for(int i = 0; i < ApplicationClass.assignments.size(); i++){
-                            ApplicationClass.assignments.get(i).setQuestion(ApplicationClass.questions.get(0).getQuestions());
-                            ApplicationClass.assignments.get(i).setAnswerCorrect(ApplicationClass.questions.get(0).getAnswerCorrect());
-                        }
+//                        for(int i = 0; i < ApplicationClass.assignments.size(); i++){
+////                            ApplicationClass.assignments.get(i).setQuestion(ApplicationClass.questions.get(0).getQuestion());
+////                            ApplicationClass.assignments.get(i).setAnswerCorrect(ApplicationClass.questions.get(0).getAnswerCorrect());
+////                        }
+                        System.out.println(ApplicationClass.questions.get(0).getQuestion());
 
-                        String question = ApplicationClass.questions.get(0).getQuestions();
+                        String question = ApplicationClass.questions.get(0).getQuestion();
                         String[] questionArray = question.split("//");
                         String answerCorrect = ApplicationClass.questions.get(0).getAnswerCorrect();
                         String[] answerCorrectArray = answerCorrect.split("//");
@@ -81,14 +85,20 @@ public class TeacherCreateAssignment extends AppCompatActivity{
                         for(int i = 0; i < answerCorrectArray.length; i++){
                             Response responseObject = new Response(questionArray[i], answerCorrectArray[i]);
                             responseArrayList.add(responseObject);
+
                         }
 
                         ApplicationClass.responses = responseArrayList;
-
                         adapter = new QuestionArrayAdapterTeacher( TeacherCreateAssignment.this, ApplicationClass.responses);
                         lvQuestionListTeacher.setAdapter(adapter);
                         showProgress(false);
-                        TeacherCreateAssignment.this.finish();
+                        btnCreateAssignment.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                TeacherCreateAssignment.this.finish();
+                            }
+                        });
+
 
                     }
 
