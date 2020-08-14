@@ -1,7 +1,5 @@
 package com.example.fokus;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
@@ -9,8 +7,8 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,13 +17,15 @@ import com.backendless.BackendlessUser;
 import com.backendless.async.callback.AsyncCallback;
 import com.backendless.exceptions.BackendlessFault;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 public class Login extends AppCompatActivity {
     private View mProgressView;
     private View mLoginFormView;
     private TextView tvLoad;
 
     EditText etMail, etPassword;
-    Button btnLogin, btnRegister, btnResetPassword;
+    ImageView btnLogin, btnRegister; //btnResetPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +39,8 @@ public class Login extends AppCompatActivity {
         etMail = findViewById(R.id.etMail);
         etPassword = findViewById(R.id.etPassword);
         btnLogin = findViewById(R.id.btnLogin);
-        btnRegister = findViewById(R.id.btnRegisterTeacher);
-        btnResetPassword = findViewById(R.id.btnResetPassword);
+        btnRegister = findViewById(R.id.btnRegister);
+        //btnResetPassword = findViewById(R.id.btnResetPassword); implement this later
 
         // When Login button is clicked...
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -100,12 +100,12 @@ public class Login extends AppCompatActivity {
             }
         });
 
-        btnResetPassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        //btnResetPassword.setOnClickListener(new View.OnClickListener() {
+          // @Override
+           // public void onClick(View view) {
 
-            }
-        });
+           // }
+       // });
 
 
 

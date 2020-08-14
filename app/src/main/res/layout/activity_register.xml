@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -29,57 +29,111 @@
         android:textStyle="bold"
         android:visibility="gone" />
 
-    <LinearLayout
+    <RelativeLayout
+        android:id="@+id/login_form"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/login_form"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="37dp"
         android:orientation="vertical">
-
-        <EditText
-            android:id="@+id/etName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="please enter your name"
-            android:inputType="textPersonName" />
-
-        <EditText
-            android:id="@+id/etMail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="please enter email"
-            android:inputType="textEmailAddress" />
 
         <EditText
             android:id="@+id/etPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="380dp"
+            android:backgroundTint="#FFC000"
+            android:backgroundTintMode="src_in"
             android:ems="10"
-            android:hint="please enter your password"
+            android:hint="Password"
             android:inputType="textPassword" />
 
         <EditText
             android:id="@+id/etConfirmPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="330dp"
+            android:layout_marginEnd="8dp"
+            android:backgroundTint="#FFC000"
+            android:backgroundTintMode="src_in"
+            android:hint="Confirm Password" />
+
+        <EditText
+            android:id="@+id/etName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="505dp"
+            android:backgroundTint="#FFC000"
+            android:backgroundTintMode="src_in"
             android:ems="10"
-            android:hint="please confirm password"
-            android:inputType="textPassword" />
+            android:hint="Name"
+            android:inputType="textPersonName" />
 
-        <Button
+        <EditText
+            android:id="@+id/etMail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="444dp"
+            android:backgroundTint="#FFC000"
+            android:backgroundTintMode="src_in"
+            android:ems="10"
+            android:hint="Email"
+            android:inputType="textEmailAddress" />
+
+        <ImageView
             android:id="@+id/btnRegisterTeacher"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Register as Teacher" />
+            android:layout_width="166dp"
+            android:layout_height="263dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="40dp"
+            android:layout_marginBottom="47dp"
+            app:srcCompat="@mipmap/teacher_signup_button" />
 
-        <Button
+        <ImageView
             android:id="@+id/btnRegisterStudent"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Register as student" />
+            android:layout_width="169dp"
+            android:layout_height="229dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="40dp"
+            android:layout_marginBottom="64dp"
+            app:srcCompat="@mipmap/student_signup_button" />
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="227dp"
+            android:layout_height="156dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="-2dp"
+            android:layout_marginEnd="90dp"
+            app:srcCompat="@mipmap/welcome_to_fokus" />
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="109dp"
+            android:layout_height="36dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="148dp"
+            android:layout_marginBottom="233dp"
+            app:srcCompat="@mipmap/sun_up_as" />
 
 
-    </LinearLayout>
+    </RelativeLayout>
 
-</LinearLayout>
+</RelativeLayout>

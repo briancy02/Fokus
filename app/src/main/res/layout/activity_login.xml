@@ -1,11 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".Login">
+
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="413dp"
+        android:layout_height="236dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="69dp"
+        android:layout_marginEnd="-2dp"
+        app:srcCompat="@mipmap/welcome_to_fokus" />
 
     <ProgressBar
         android:id="@+id/login_progress"
@@ -29,51 +43,69 @@
         android:textStyle="bold"
         android:visibility="gone" />
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/login_form"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/etMail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="please enter email"
-            android:inputType="textEmailAddress" />
+    </RelativeLayout>
 
-        <EditText
-            android:id="@+id/etPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="please enter password"
-            android:inputType="textPassword" />
-
-    </LinearLayout>
-
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"/>
 
-    <Button
+    <EditText
+        android:id="@+id/etPassword"
+        android:layout_width="335dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="36dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginBottom="0dp"
+        android:backgroundTint="#FFC000"
+        android:backgroundTintMode="src_in"
+        android:ems="10"
+        android:foregroundTint="#FFC000"
+        android:hint="Password"
+        android:inputType="textPassword" />
+
+    <EditText
+        android:id="@+id/etMail"
+        android:layout_width="335dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="273dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginBottom="0dp"
+        android:backgroundTint="#FFC000"
+        android:backgroundTintMode="src_in"
+        android:ems="10"
+        android:foregroundTint="#FFC000"
+        android:hint="Username"
+        android:inputType="textEmailAddress" />
+
+    <ImageView
         android:id="@+id/btnLogin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Login" />
+        android:layout_width="wrap_content"
+        android:layout_height="41dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="232dp"
+        app:srcCompat="@mipmap/log_in" />
 
-    <Button
-        android:id="@+id/btnRegisterTeacher"
-        android:layout_width="match_parent"
+    <ImageView
+        android:id="@+id/btnRegister"
+        android:layout_width="240dp"
         android:layout_height="wrap_content"
-        android:text="Register" />
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="118dp"
+        app:srcCompat="@mipmap/sign_up" />
 
-    <Button
-        android:id="@+id/btnResetPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Reset Password" />
-
-</LinearLayout>
+</RelativeLayout>

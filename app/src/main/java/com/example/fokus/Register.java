@@ -1,17 +1,13 @@
 package com.example.fokus;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
-import android.app.Application;
-import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,7 +16,7 @@ import com.backendless.BackendlessUser;
 import com.backendless.async.callback.AsyncCallback;
 import com.backendless.exceptions.BackendlessFault;
 
-import java.util.Map;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class Register extends AppCompatActivity {
     private View mProgressView;
@@ -28,7 +24,7 @@ public class Register extends AppCompatActivity {
     private TextView tvLoad;
 
     EditText etName, etMail, etPassword, etConfirmPassword;
-    Button btnRegisterTeacher, btnRegisterStudent;
+    ImageView btnRegisterTeacher, btnRegisterStudent;
 
 
     @Override
