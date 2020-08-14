@@ -13,6 +13,7 @@ public class ApplicationClass extends Application {
 
     public static List<Assignment> assignments;
     public static List<Response> responses;
+    public static List<Question> questions;
     @Override
     public void onCreate() {
         super.onCreate();

@@ -1,72 +1,52 @@
 package com.example.fokus;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.backendless.Backendless;
-import com.backendless.BackendlessUser;
 import com.backendless.async.callback.AsyncCallback;
 import com.backendless.exceptions.BackendlessFault;
 import com.backendless.persistence.DataQueryBuilder;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class TeacherMain extends AppCompatActivity {
-
+public class TeacherCreateAssignment extends AppCompatActivity{
     private View mProgressView;
     private View mLoginFormView;
     private TextView tvLoad;
+    QuestionArrayAdapterTeacher adapter;
 
-
-    Button btnNewAssign;
-    AssignmentsArrayAdapter adapter;
-
-    ListView lvListTeacher;
+    ListView lvQuestionListTeacher;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_teacher_main);
-        btnNewAssign = findViewById(R.id.btnNewAssign);
-
+        setContentView(R.layout.activity_teacher_create_assignment);
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
         tvLoad = findViewById(R.id.tvLoad);
 
-        // When New Assignment is Clicked
-        btnNewAssign.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Takes student to their profile
-                startActivity(new Intent(TeacherMain.this, NewAssignment.class));
+        lvQuestionListTeacher = findViewById(R.id.LvQuestionListTeacher);
 
-            }
-        });
+        final String youtubeURL = getIntent().getStringExtra("youtubeURL");
 
-//        btnDueDate = (Button) findViewById(R.id.btnDueDate);
-
-        lvListTeacher = findViewById(R.id.LvListTeacher);
-
-        String whereClause = "teacherEmail = '" + Backendless.UserService.CurrentUser().getEmail() + "'";
+        String whereClause = "youtubeLink = '" + youtubeURL + "' and teacherEmail = '" + Backendless.UserService.CurrentUser().getEmail() + "'";
         DataQueryBuilder queryBuilder = DataQueryBuilder.create();
         queryBuilder.setWhereClause(whereClause);
-        queryBuilder.setGroupBy("dueDate");
+        System.out.println(whereClause);
 
         showProgress(true);
         tvLoad.setText("Getting all assignments... please wait...");
@@ -74,49 +54,66 @@ public class TeacherMain extends AppCompatActivity {
         Backendless.Persistence.of(Assignment.class).find(queryBuilder, new AsyncCallback<List<Assignment>>() {
             @Override
             public void handleResponse(List<Assignment> response) {
+                String whereClause2 = "YoutubeURL = '" + youtubeURL + "'";
+                DataQueryBuilder queryBuilder = DataQueryBuilder.create();
+                queryBuilder.setWhereClause(whereClause2);
+                System.out.println(whereClause2);
+
                 ApplicationClass.assignments = response;
 
-                //new ass arr class
-                adapter = new AssignmentsArrayAdapter(TeacherMain.this, ApplicationClass.assignments);
-                lvListTeacher.setAdapter(adapter);
-                showProgress(false);
+
+                Backendless.Persistence.of(Question.class).find(queryBuilder, new AsyncCallback<List<Question>>() {
+                    @Override
+                    public void handleResponse(List<Question> response) {
+                        ApplicationClass.questions = response;
+                        for(int i = 0; i < ApplicationClass.assignments.size(); i++){
+                            ApplicationClass.assignments.get(i).setQuestion(ApplicationClass.questions.get(0).getQuestions());
+                            ApplicationClass.assignments.get(i).setAnswerCorrect(ApplicationClass.questions.get(0).getAnswerCorrect());
+                        }
+
+                        String question = ApplicationClass.questions.get(0).getQuestions();
+                        String[] questionArray = question.split("//");
+                        String answerCorrect = ApplicationClass.questions.get(0).getAnswerCorrect();
+                        String[] answerCorrectArray = answerCorrect.split("//");
+
+                        ArrayList<Response> responseArrayList = new ArrayList<Response>();
+
+                        for(int i = 0; i < answerCorrectArray.length; i++){
+                            Response responseObject = new Response(questionArray[i], answerCorrectArray[i]);
+                            responseArrayList.add(responseObject);
+                        }
+
+                        ApplicationClass.responses = responseArrayList;
+
+                        adapter = new QuestionArrayAdapterTeacher( TeacherCreateAssignment.this, ApplicationClass.responses);
+                        lvQuestionListTeacher.setAdapter(adapter);
+                        showProgress(false);
+                        TeacherCreateAssignment.this.finish();
+
+                    }
+
+                    @Override
+                    public void handleFault(BackendlessFault fault) {
+                        Toast.makeText(TeacherCreateAssignment.this, "Error: " + fault.getMessage(), Toast.LENGTH_SHORT).show();
+                        showProgress(false);
+
+                    }
+                });
+
             }
 
             @Override
             public void handleFault(BackendlessFault fault) {
-                Toast.makeText(TeacherMain.this, "Error: " + fault.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(TeacherCreateAssignment.this, "Error: " + fault.getMessage(), Toast.LENGTH_SHORT).show();
                 showProgress(false);
 
             }
         });
 
-        lvListTeacher.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-
-                // Teacher View Assignment unlike student view should be results of students
-                Intent intent = new Intent(TeacherMain.this, TeacherViewAssignment.class);
-                intent.putExtra("index", i);
-                startActivityForResult(intent, 1);
-            }
-        });
-
-
 
 
 
     }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if( requestCode ==1){
-            adapter.notifyDataSetChanged();
-        }
-    }
-
     /**
      * Shows the progress UI and hides the login form.
      */

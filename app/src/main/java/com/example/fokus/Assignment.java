@@ -13,6 +13,7 @@ public class Assignment {
     Boolean complete;
     String studentEmail;
     String teacherEmail;
+    int score;
 
     public Assignment(){
         
@@ -112,5 +113,13 @@ public class Assignment {
 
     public void setTeacherEmail(String teacherEmail) {
         this.teacherEmail = teacherEmail;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
     }
 }

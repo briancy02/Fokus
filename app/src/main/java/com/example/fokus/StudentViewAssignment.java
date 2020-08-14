@@ -69,6 +69,8 @@ public class StudentViewAssignment extends AppCompatActivity{
         lvQuestionList.setAdapter(adapter);
         showProgress(false);
 
+        StudentViewAssignment.this.finish();
+
     }
     /**
      * Shows the progress UI and hides the login form.

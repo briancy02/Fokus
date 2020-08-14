@@ -64,7 +64,7 @@ public class NewAssignment extends AppCompatActivity{
                     String assignmentName = etAssignmentName.getText().toString().trim();
                     String dueDate = etDueDate.getText().toString().trim();
                     String description = etDescription.getText().toString().trim();
-                    String youtubeURL = etYoutubeURL.getText().toString().trim();
+                    final String youtubeURL = etYoutubeURL.getText().toString().trim();
 
                     // this doesnt retrieve the teacher object
                     Teacher teacher = (Teacher) Backendless.UserService.CurrentUser().getProperty("teacher");
@@ -91,6 +91,7 @@ public class NewAssignment extends AppCompatActivity{
                         assignment.setYoutubeLink(youtubeURL);
                         assignment.setTeacher(teacher);
                         assignment.setStudentEmail(studentEmail);
+                        assignment.setTeacherEmail(String.valueOf(Backendless.UserService.CurrentUser().getEmail()));
                         assignments.add(assignment);
 
                     }
@@ -100,6 +101,10 @@ public class NewAssignment extends AppCompatActivity{
                         public void handleResponse(List<String> ids) {
                             for (String id : ids) {
                                 Log.i("NewAssignment", "Order object has been saved with ID - " + id);
+                                //startActivity(new Intent(NewAssignment.this, TeacherCreateAssignment.class));
+                                Intent intent = new Intent(NewAssignment.this, TeacherCreateAssignment.class);
+                                intent.putExtra("youtubeURL", youtubeURL);
+                                startActivity(intent);
                                 NewAssignment.this.finish();
                             }
                         }
