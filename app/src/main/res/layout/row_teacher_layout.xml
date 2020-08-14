@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="223dp"
+            android:layout_height="160dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvAssignmentNameTeacher"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Assignment Name"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/tvAssignmentDescriptionTeacher"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Description" />
+
+            <TextView
+                android:id="@+id/textView5Teacher"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="dueDate" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/ivVideoTeacher"
+            android:layout_width="178dp"
+            android:layout_height="160dp"
+            android:layout_weight="1"
+            tools:srcCompat="@drawable/ic_menu_slideshow" />
+    </LinearLayout>
+</LinearLayout>
